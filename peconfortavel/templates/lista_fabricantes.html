@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Fabricantes</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nome</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fab in fabricantes %}
+        <tr>
+            <td>{{ fab.codigo }}</td>
+            <td>{{ fab.nome }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="2">Nenhum fabricante cadastrado.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Cadastro de Fabricante</h2>
+<form method="post" id="idFrmFabricante" name="frmFabricante">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="idTxtCodigo" class="form-label">Código</label>
+        <input type="number" class="form-control" id="idTxtCodigo" name="codigo" value="{{ form.codigo.value|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="idTxtNome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="idTxtNome" name="nome" value="{{ form.nome.value|default:'' }}" maxlength="70" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+    <button type="reset" class="btn btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
+</form>
+{% endblock %}

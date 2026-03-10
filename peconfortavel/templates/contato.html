@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Fale conosco - SAC</h2>
+<form id="idFrmContato" name="frmContato">
+    <div class="mb-3">
+        <label for="idTxtNomeCompleto" class="form-label">Nome completo</label>
+        <input type="text" class="form-control" id="idTxtNomeCompleto" name="nomeCompleto" maxlength="100">
+    </div>
+    <div class="mb-3">
+        <label for="idTxtEmail" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="idTxtEmail" name="email" maxlength="100">
+    </div>
+    <div class="mb-3">
+        <label for="idTxtTelefone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" id="idTxtTelefone" name="telefone" maxlength="11">
+    </div>
+    <div class="mb-3">
+        <label for="idSelHorario" class="form-label">Melhor horário para contato</label>
+        <select class="form-select" id="idSelHorario" name="horario">
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="idTxtMensagem" class="form-label">Mensagem</label>
+        <textarea class="form-control" id="idTxtMensagem" name="mensagem" rows="4" maxlength="1024"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="reset" class="btn btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
+</form>
+<p class="mt-3 text-muted">* Esta funcionalidade não está ativa no momento.</p>
+{% endblock %}

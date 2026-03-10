@@ -1,0 +1,12 @@
+[
+  {"model": "core.fabricante", "pk": 1, "fields": {"codigo": 1, "nome": "Adidão"}},
+  {"model": "core.fabricante", "pk": 2, "fields": {"codigo": 2, "nome": "Naike"}},
+  {"model": "core.fabricante", "pk": 3, "fields": {"codigo": 3, "nome": "Pulma"}},
+  {"model": "core.fabricante", "pk": 4, "fields": {"codigo": 4, "nome": "Olímpicos"}},
+  {"model": "core.fabricante", "pk": 5, "fields": {"codigo": 5, "nome": "Pontão"}},
+  {"model": "core.fabricante", "pk": 6, "fields": {"codigo": 6, "nome": "Meião"}},
+  {"model": "core.fabricante", "pk": 7, "fields": {"codigo": 7, "nome": "Reboco"}},
+  {"model": "core.fabricante", "pk": 8, "fields": {"codigo": 8, "nome": "Paquetás"}},
+  {"model": "core.fabricante", "pk": 9, "fields": {"codigo": 9, "nome": "Mizduno"}},
+  {"model": "core.fabricante", "pk": 10, "fields": {"codigo": 10, "nome": "Tiadora"}}
+]

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Cadastro de Cliente</h2>
+<form method="post" id="idFrmCliente" name="frmCliente">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="idTxtCpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" id="idTxtCpf" name="cpf" value="{{ form.cpf.value|default:'' }}" maxlength="11" required>
+        {% if form.cpf.errors %}<div class="text-danger">{{ form.cpf.errors }}</div>{% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="idTxtNome" class="form-label">Nome completo</label>
+        <input type="text" class="form-control" id="idTxtNome" name="nome" value="{{ form.nome.value|default:'' }}" maxlength="70" required>
+        {% if form.nome.errors %}<div class="text-danger">{{ form.nome.errors }}</div>{% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="idTxtEndereco" class="form-label">Endereço</label>
+        <input type="text" class="form-control" id="idTxtEndereco" name="endereco" value="{{ form.endereco.value|default:'' }}" maxlength="100" required>
+    </div>
+    <div class="mb-3">
+        <label for="idTxtTelefone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" id="idTxtTelefone" name="telefone" value="{{ form.telefone.value|default:'' }}" maxlength="11" required>
+    </div>
+    <div class="mb-3">
+        <label for="idSelEstado" class="form-label">Estado</label>
+        <select class="form-select" id="idSelEstado" name="estado" required>
+            <option value="">Selecione</option>
+            {% for sigla, nome in form.estado.field.choices %}
+                <option value="{{ sigla }}" {% if form.estado.value == sigla %}selected{% endif %}>{{ nome }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="idTxtCidade" class="form-label">Cidade</label>
+        <input type="text" class="form-control" id="idTxtCidade" name="cidade" value="{{ form.cidade.value|default:'' }}" maxlength="50" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Gênero</label><br>
+        {% for value, label in form.genero.field.choices %}
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="genero" id="idRadGenero{{ value }}" value="{{ value }}" {% if form.genero.value == value %}checked{% endif %} required>
+            <label class="form-check-label" for="idRadGenero{{ value }}">{{ label }}</label>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Contato preferencial</label><br>
+        {% for value, label in form.contato_pref.field.choices %}
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="contato_pref" id="idRadContato{{ value }}" value="{{ value }}" {% if form.contato_pref.value == value %}checked{% endif %} required>
+            <label class="form-check-label" for="idRadContato{{ value }}">{{ label }}</label>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        <label for="idTxtEmail" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="idTxtEmail" name="email" value="{{ form.email.value|default:'' }}" maxlength="100" required>
+    </div>
+    <div class="mb-3">
+        <label for="idPwdSenha" class="form-label">Senha</label>
+        <input type="password" class="form-control" id="idPwdSenha" name="senha" maxlength="256" required>
+        <div class="form-text">A senha deve ter exatamente 8 caracteres.</div>
+    </div>
+    <div class="mb-3">
+        <label for="idPwdConfirmar" class="form-label">Confirmar senha</label>
+        <input type="password" class="form-control" id="idPwdConfirmar" name="confirmar_senha" maxlength="256" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+    <button type="reset" class="btn btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
+</form>
+{% endblock %}
