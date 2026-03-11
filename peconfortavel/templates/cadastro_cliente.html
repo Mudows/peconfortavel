@@ -1,71 +1,136 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Cadastro de Cliente</h2>
-<form method="post" id="idFrmCliente" name="frmCliente">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="idTxtCpf" class="form-label">CPF</label>
-        <input type="text" class="form-control" id="idTxtCpf" name="cpf" value="{{ form.cpf.value|default:'' }}" maxlength="11" required>
-        {% if form.cpf.errors %}<div class="text-danger">{{ form.cpf.errors }}</div>{% endif %}
+
+<div class="mb-8 pb-6 border-b border-[#E0D5C8]">
+  <p class="text-[.72rem] uppercase tracking-[.14em] text-[#C4724A] font-medium mb-1">Módulo de gestão</p>
+  <h2 class="font-light text-[#2C1A0E] leading-tight" style="font-family:'Cormorant Garamond',serif;font-size:2.5rem">Cadastro de Cliente</h2>
+  <p class="text-[#9E9087] text-sm mt-1">Preencha todos os campos para registrar um novo cliente.</p>
+</div>
+
+<form method="post" id="idFrmCliente" name="frmCliente" class="bg-white rounded-2xl border border-[#E0D5C8] p-8 md:p-10" style="box-shadow:0 1px 3px rgba(44,26,14,.08)">
+  {% csrf_token %}
+
+  <!-- Identificação -->
+  <p class="text-[.7rem] uppercase tracking-[.12em] text-[#9E9087] font-medium mb-5 flex items-center gap-2">Identificação <span class="flex-1 h-px bg-[#E0D5C8]"></span></p>
+  <div class="grid md:grid-cols-2 gap-x-6 gap-y-5 mb-8">
+
+    <div>
+      <label class="pc-label" for="idTxtCpf">CPF <span class="text-[#C4724A]">*</span></label>
+      <input type="text" class="pc-input" id="idTxtCpf" name="cpf"
+             value="{{ form.cpf.value|default:'' }}" maxlength="11" required placeholder="Somente números">
+      {% if form.cpf.errors %}<p class="pc-error">{{ form.cpf.errors }}</p>{% endif %}
+      <p class="pc-hint">11 dígitos, somente números.</p>
     </div>
-    <div class="mb-3">
-        <label for="idTxtNome" class="form-label">Nome completo</label>
-        <input type="text" class="form-control" id="idTxtNome" name="nome" value="{{ form.nome.value|default:'' }}" maxlength="70" required>
-        {% if form.nome.errors %}<div class="text-danger">{{ form.nome.errors }}</div>{% endif %}
+
+    <div>
+      <label class="pc-label" for="idTxtNome">Nome completo <span class="text-[#C4724A]">*</span></label>
+      <input type="text" class="pc-input" id="idTxtNome" name="nome"
+             value="{{ form.nome.value|default:'' }}" maxlength="70" required placeholder="Entre 25 e 70 caracteres">
+      {% if form.nome.errors %}<p class="pc-error">{{ form.nome.errors }}</p>{% endif %}
+      <p class="pc-hint">Entre 25 e 70 caracteres.</p>
     </div>
-    <div class="mb-3">
-        <label for="idTxtEndereco" class="form-label">Endereço</label>
-        <input type="text" class="form-control" id="idTxtEndereco" name="endereco" value="{{ form.endereco.value|default:'' }}" maxlength="100" required>
+
+    <div class="md:col-span-2">
+      <label class="pc-label" for="idTxtEndereco">Endereço <span class="text-[#C4724A]">*</span></label>
+      <input type="text" class="pc-input" id="idTxtEndereco" name="endereco"
+             value="{{ form.endereco.value|default:'' }}" maxlength="100" required placeholder="Rua, número, bairro">
     </div>
-    <div class="mb-3">
-        <label for="idTxtTelefone" class="form-label">Telefone</label>
-        <input type="text" class="form-control" id="idTxtTelefone" name="telefone" value="{{ form.telefone.value|default:'' }}" maxlength="11" required>
+  </div>
+
+  <!-- Localização -->
+  <p class="text-[.7rem] uppercase tracking-[.12em] text-[#9E9087] font-medium mb-5 flex items-center gap-2">Localização <span class="flex-1 h-px bg-[#E0D5C8]"></span></p>
+  <div class="grid md:grid-cols-3 gap-x-6 gap-y-5 mb-8">
+
+    <div class="md:col-span-2">
+      <label class="pc-label" for="idTxtCidade">Cidade <span class="text-[#C4724A]">*</span></label>
+      <input type="text" class="pc-input" id="idTxtCidade" name="cidade"
+             value="{{ form.cidade.value|default:'' }}" maxlength="50" required placeholder="Nome da cidade">
     </div>
-    <div class="mb-3">
-        <label for="idSelEstado" class="form-label">Estado</label>
-        <select class="form-select" id="idSelEstado" name="estado" required>
-            <option value="">Selecione</option>
-            {% for sigla, nome in form.estado.field.choices %}
-                <option value="{{ sigla }}" {% if form.estado.value == sigla %}selected{% endif %}>{{ nome }}</option>
-            {% endfor %}
-        </select>
+
+    <div>
+      <label class="pc-label" for="idSelEstado">Estado <span class="text-[#C4724A]">*</span></label>
+      <select class="pc-select" id="idSelEstado" name="estado" required>
+        <option value="">Selecione</option>
+        {% for sigla, nome in form.estado.field.choices %}
+          <option value="{{ sigla }}" {% if form.estado.value == sigla %}selected{% endif %}>{{ nome }}</option>
+        {% endfor %}
+      </select>
     </div>
-    <div class="mb-3">
-        <label for="idTxtCidade" class="form-label">Cidade</label>
-        <input type="text" class="form-control" id="idTxtCidade" name="cidade" value="{{ form.cidade.value|default:'' }}" maxlength="50" required>
+  </div>
+
+  <!-- Contato -->
+  <p class="text-[.7rem] uppercase tracking-[.12em] text-[#9E9087] font-medium mb-5 flex items-center gap-2">Contato <span class="flex-1 h-px bg-[#E0D5C8]"></span></p>
+  <div class="grid md:grid-cols-2 gap-x-6 gap-y-5 mb-8">
+
+    <div>
+      <label class="pc-label" for="idTxtTelefone">Telefone <span class="text-[#C4724A]">*</span></label>
+      <input type="text" class="pc-input" id="idTxtTelefone" name="telefone"
+             value="{{ form.telefone.value|default:'' }}" maxlength="11" required placeholder="Somente números">
+      <p class="pc-hint">11 dígitos, somente números.</p>
     </div>
-    <div class="mb-3">
-        <label class="form-label">Gênero</label><br>
+
+    <div>
+      <label class="pc-label" for="idTxtEmail">E-mail <span class="text-[#C4724A]">*</span></label>
+      <input type="email" class="pc-input" id="idTxtEmail" name="email"
+             value="{{ form.email.value|default:'' }}" maxlength="100" required placeholder="exemplo@email.com">
+      {% if form.email.errors %}<p class="pc-error">{{ form.email.errors }}</p>{% endif %}
+    </div>
+
+    <div>
+      <label class="pc-label">Gênero <span class="text-[#C4724A]">*</span></label>
+      <div class="pc-radio-group">
         {% for value, label in form.genero.field.choices %}
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="genero" id="idRadGenero{{ value }}" value="{{ value }}" {% if form.genero.value == value %}checked{% endif %} required>
-            <label class="form-check-label" for="idRadGenero{{ value }}">{{ label }}</label>
-        </div>
+        <label class="pc-radio-option">
+          <input type="radio" id="idRadGenero{{ value }}" name="genero" value="{{ value }}"
+                 {% if form.genero.value == value %}checked{% endif %} required>
+          <span>{{ label }}</span>
+        </label>
         {% endfor %}
+      </div>
     </div>
-    <div class="mb-3">
-        <label class="form-label">Contato preferencial</label><br>
+
+    <div>
+      <label class="pc-label">Contato preferencial <span class="text-[#C4724A]">*</span></label>
+      <div class="pc-radio-group">
         {% for value, label in form.contato_pref.field.choices %}
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="contato_pref" id="idRadContato{{ value }}" value="{{ value }}" {% if form.contato_pref.value == value %}checked{% endif %} required>
-            <label class="form-check-label" for="idRadContato{{ value }}">{{ label }}</label>
-        </div>
+        <label class="pc-radio-option">
+          <input type="radio" id="idRadContato{{ value }}" name="contato_pref" value="{{ value }}"
+                 {% if form.contato_pref.value == value %}checked{% endif %} required>
+          <span>{{ label }}</span>
+        </label>
         {% endfor %}
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="idTxtEmail" class="form-label">E-mail</label>
-        <input type="email" class="form-control" id="idTxtEmail" name="email" value="{{ form.email.value|default:'' }}" maxlength="100" required>
+  </div>
+
+  <!-- Acesso -->
+  <p class="text-[.7rem] uppercase tracking-[.12em] text-[#9E9087] font-medium mb-5 flex items-center gap-2">Acesso ao sistema <span class="flex-1 h-px bg-[#E0D5C8]"></span></p>
+  <div class="bg-[#FAF7F2] border border-[#E0D5C8] rounded-lg p-3.5 mb-5 text-[.82rem] text-[#9E9087] flex items-start gap-2">
+    <svg class="w-4 h-4 text-[#C4724A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    O nome de usuário será igual ao e-mail informado acima.
+  </div>
+  <div class="grid md:grid-cols-2 gap-x-6 gap-y-5 mb-8">
+
+    <div>
+      <label class="pc-label" for="idPwdSenha">Senha <span class="text-[#C4724A]">*</span></label>
+      <input type="password" class="pc-input" id="idPwdSenha" name="senha" maxlength="256" required placeholder="8 caracteres exatos">
+      <p class="pc-hint">A senha deve ter exatamente 8 caracteres.</p>
     </div>
-    <div class="mb-3">
-        <label for="idPwdSenha" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="idPwdSenha" name="senha" maxlength="256" required>
-        <div class="form-text">A senha deve ter exatamente 8 caracteres.</div>
+
+    <div>
+      <label class="pc-label" for="idPwdConfirmar">Confirmar senha <span class="text-[#C4724A]">*</span></label>
+      <input type="password" class="pc-input" id="idPwdConfirmar" name="confirmar_senha" maxlength="256" required placeholder="Repita a senha">
     </div>
-    <div class="mb-3">
-        <label for="idPwdConfirmar" class="form-label">Confirmar senha</label>
-        <input type="password" class="form-control" id="idPwdConfirmar" name="confirmar_senha" maxlength="256" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
-    <button type="reset" class="btn btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex gap-3 pt-6 border-t border-[#E0D5C8]">
+    <button type="submit" class="pc-btn-primary">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      Cadastrar
+    </button>
+    <button type="reset" class="pc-btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
+  </div>
+
 </form>
 {% endblock %}

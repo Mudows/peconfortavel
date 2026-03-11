@@ -1,33 +1,103 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Fale conosco - SAC</h2>
-<form id="idFrmContato" name="frmContato">
-    <div class="mb-3">
-        <label for="idTxtNomeCompleto" class="form-label">Nome completo</label>
-        <input type="text" class="form-control" id="idTxtNomeCompleto" name="nomeCompleto" maxlength="100">
+
+<div class="mb-8 pb-6 border-b border-[#E0D5C8]">
+  <p class="text-[.72rem] uppercase tracking-[.14em] text-[#C4724A] font-medium mb-1">Atendimento</p>
+  <h2 class="font-light text-[#2C1A0E] leading-tight" style="font-family:'Cormorant Garamond',serif;font-size:2.5rem">Fale conosco — SAC</h2>
+  <p class="text-[#9E9087] text-sm mt-1">Envie sua dúvida, sugestão ou elogio. Nossa equipe retornará em breve.</p>
+</div>
+
+<div class="grid lg:grid-cols-[280px_1fr] gap-10">
+
+  <!-- Info lateral -->
+  <div class="space-y-5">
+    <div class="flex gap-4 items-start">
+      <div class="w-10 h-10 rounded-lg bg-[#F2EDE4] flex items-center justify-center text-[#C4724A] flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+      </div>
+      <div>
+        <p class="text-[.74rem] uppercase tracking-widest text-[#9E9087] font-medium">Telefone SAC</p>
+        <p class="text-[.9rem] text-[#2C1A0E] mt-0.5">0800 000 0000</p>
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="idTxtEmail" class="form-label">E-mail</label>
-        <input type="email" class="form-control" id="idTxtEmail" name="email" maxlength="100">
+    <div class="flex gap-4 items-start">
+      <div class="w-10 h-10 rounded-lg bg-[#F2EDE4] flex items-center justify-center text-[#C4724A] flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+      </div>
+      <div>
+        <p class="text-[.74rem] uppercase tracking-widest text-[#9E9087] font-medium">E-mail</p>
+        <p class="text-[.9rem] text-[#2C1A0E] mt-0.5">sac@peconfortavel.com.br</p>
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="idTxtTelefone" class="form-label">Telefone</label>
-        <input type="text" class="form-control" id="idTxtTelefone" name="telefone" maxlength="11">
+    <div class="flex gap-4 items-start">
+      <div class="w-10 h-10 rounded-lg bg-[#F2EDE4] flex items-center justify-center text-[#C4724A] flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div>
+        <p class="text-[.74rem] uppercase tracking-widest text-[#9E9087] font-medium">Horário</p>
+        <p class="text-[.9rem] text-[#2C1A0E] mt-0.5">Seg–Sex, 8h às 18h</p>
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="idSelHorario" class="form-label">Melhor horário para contato</label>
-        <select class="form-select" id="idSelHorario" name="horario">
-            <option value="Manhã">Manhã</option>
-            <option value="Tarde">Tarde</option>
-            <option value="Noite">Noite</option>
+    <div class="mt-6 p-4 bg-[#F2EDE4] border border-[#E0D5C8] rounded-xl text-[.78rem] text-[#9E9087] flex items-start gap-2">
+      <svg class="w-4 h-4 text-[#C4724A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      Esta funcionalidade não está ativa no momento.
+    </div>
+  </div>
+
+  <!-- Formulário -->
+  <form id="idFrmContato" name="frmContato" class="bg-white rounded-2xl border border-[#E0D5C8] p-8" style="box-shadow:0 1px 3px rgba(44,26,14,.08)">
+
+    <div class="grid md:grid-cols-2 gap-x-6 gap-y-5 mb-5">
+
+      <div class="md:col-span-2">
+        <label class="pc-label" for="idTxtNomeCompleto">Nome completo</label>
+        <input type="text" class="pc-input" id="idTxtNomeCompleto" name="nomeCompleto" maxlength="100" placeholder="Seu nome completo">
+      </div>
+
+      <div>
+        <label class="pc-label" for="idTxtEmail">E-mail</label>
+        <input type="email" class="pc-input" id="idTxtEmail" name="email" maxlength="100" placeholder="seu@email.com">
+      </div>
+
+      <div>
+        <label class="pc-label" for="idTxtTelefone">Telefone</label>
+        <input type="text" class="pc-input" id="idTxtTelefone" name="telefone" maxlength="11" placeholder="Somente números">
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="pc-label" for="idSelHorario">Melhor horário para contato</label>
+        <select class="pc-select" id="idSelHorario" name="horario">
+          <option value="Manhã">Manhã</option>
+          <option value="Tarde">Tarde</option>
+          <option value="Noite">Noite</option>
         </select>
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="pc-label" for="idTxtMensagem">Mensagem</label>
+        <textarea class="pc-textarea" id="idTxtMensagem" name="mensagem" rows="4" maxlength="1024" placeholder="Descreva sua dúvida ou comentário..."></textarea>
+        <p class="pc-hint flex justify-between">
+          <span>Máximo de 1024 caracteres.</span>
+          <span id="charCount">0 / 1024</span>
+        </p>
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="idTxtMensagem" class="form-label">Mensagem</label>
-        <textarea class="form-control" id="idTxtMensagem" name="mensagem" rows="4" maxlength="1024"></textarea>
+
+    <div class="flex gap-3 pt-4 border-t border-[#E0D5C8]">
+      <button type="submit" class="pc-btn-primary">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+        Enviar mensagem
+      </button>
+      <button type="reset" class="pc-btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
     </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
-    <button type="reset" class="btn btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
-</form>
-<p class="mt-3 text-muted">* Esta funcionalidade não está ativa no momento.</p>
+
+  </form>
+</div>
+
+<script>
+  const ta = document.getElementById('idTxtMensagem');
+  const cc = document.getElementById('charCount');
+  ta?.addEventListener('input', () => { cc.textContent = ta.value.length + ' / 1024'; });
+</script>
+
 {% endblock %}

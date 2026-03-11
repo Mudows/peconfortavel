@@ -1,34 +1,67 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Produtos</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nome</th>
-            <th>Preço venda</th>
-            <th>Cor</th>
-            <th>Fabricante</th>
-            <th>Imagem</th>
+
+<div class="mb-8 pb-6 border-b border-[#E0D5C8] flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+  <div>
+    <p class="text-[.72rem] uppercase tracking-[.14em] text-[#C4724A] font-medium mb-1">Catálogo</p>
+    <h2 class="font-light text-[#2C1A0E] leading-tight" style="font-family:'Cormorant Garamond',serif;font-size:2.5rem">Produtos</h2>
+    <p class="text-[#9E9087] text-sm mt-1">Todos os calçados disponíveis no catálogo da loja.</p>
+  </div>
+  <a href="{% url 'cadastro_produto' %}" class="pc-btn-primary self-start sm:self-auto whitespace-nowrap">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+    Novo produto
+  </a>
+</div>
+
+<div class="bg-white rounded-2xl border border-[#E0D5C8] overflow-hidden" style="box-shadow:0 1px 3px rgba(44,26,14,.08)">
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse">
+      <thead>
+        <tr style="background:#2C1A0E">
+          <th class="text-left px-5 py-4 text-[rgba(250,247,242,.7)] font-medium w-16" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Img</th>
+          <th class="text-left px-5 py-4 text-[rgba(250,247,242,.7)] font-medium" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Código</th>
+          <th class="text-left px-5 py-4 text-[rgba(250,247,242,.7)] font-medium" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Nome</th>
+          <th class="text-left px-5 py-4 text-[rgba(250,247,242,.7)] font-medium" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Preço venda</th>
+          <th class="text-left px-5 py-4 text-[rgba(250,247,242,.7)] font-medium" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Cor</th>
+          <th class="text-left px-5 py-4 text-[rgba(250,247,242,.7)] font-medium" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Fabricante</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         {% for produto in produtos %}
-        <tr>
-            <td>{{ produto.codigo }}</td>
-            <td>{{ produto.nome }}</td>
-            <td>R$ {{ produto.preco_venda }}</td>
-            <td>{{ produto.get_cor_display }}</td>
-            <td>{{ produto.fabricante.nome }}</td>
-            <td>
-                {% if produto.imagem %}
-                    <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" width="50">
-                {% endif %}
-            </td>
+        <tr style="border-bottom:1px solid #F2EDE4;transition:background .15s">
+          <td class="px-5 py-4">
+            {% if produto.imagem %}
+              <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}"
+                   class="w-10 h-10 object-cover rounded-lg border border-[#E0D5C8]">
+            {% else %}
+              <div class="w-10 h-10 rounded-lg bg-[#F2EDE4] flex items-center justify-center text-[#E0D5C8]">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909"/></svg>
+              </div>
+            {% endif %}
+          </td>
+          <td class="px-5 py-4 text-[#5C3D2E] font-mono font-medium" style="font-size:.84rem">{{ produto.codigo }}</td>
+          <td class="px-5 py-4 font-medium text-[#2C1A0E]" style="font-size:.88rem">{{ produto.nome }}</td>
+          <td class="px-5 py-4">
+            <span class="font-light text-[#A85A35]" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem">R$ {{ produto.preco_venda }}</span>
+          </td>
+          <td class="px-5 py-4">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F2EDE4] border border-[#E0D5C8] rounded-full text-[#5C3D2E]" style="font-size:.75rem">
+              {{ produto.get_cor_display }}
+            </span>
+          </td>
+          <td class="px-5 py-4 text-[#5C3D2E]" style="font-size:.85rem">{{ produto.fabricante.nome }}</td>
         </tr>
         {% empty %}
-        <tr><td colspan="6">Nenhum produto cadastrado.</td></tr>
+        <tr>
+          <td colspan="6" class="px-5 py-14 text-center text-[#9E9087] italic" style="font-size:.88rem">
+            Nenhum produto cadastrado.
+            <a href="{% url 'cadastro_produto' %}" class="block mt-2 text-[#C4724A] no-underline" style="font-size:.82rem;font-style:normal">Cadastrar primeiro produto →</a>
+          </td>
+        </tr>
         {% endfor %}
-    </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 {% endblock %}

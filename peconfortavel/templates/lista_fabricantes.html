@@ -1,22 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Fabricantes</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nome</th>
+
+<div class="mb-8 pb-6 border-b border-[#E0D5C8] flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+  <div>
+    <p class="text-[.72rem] uppercase tracking-[.14em] text-[#C4724A] font-medium mb-1">Parceiros</p>
+    <h2 class="font-light text-[#2C1A0E] leading-tight" style="font-family:'Cormorant Garamond',serif;font-size:2.5rem">Fabricantes</h2>
+    <p class="text-[#9E9087] text-sm mt-1">Marcas parceiras que abastecem o catálogo da rede.</p>
+  </div>
+  <a href="{% url 'cadastro_fabricante' %}" class="pc-btn-primary self-start sm:self-auto whitespace-nowrap">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+    Novo fabricante
+  </a>
+</div>
+
+<div class="bg-white rounded-2xl border border-[#E0D5C8] overflow-hidden" style="box-shadow:0 1px 3px rgba(44,26,14,.08)">
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse">
+      <thead>
+        <tr style="background:#2C1A0E">
+          <th class="text-left px-5 py-4 text-[rgba(250,247,242,.7)] font-medium w-32" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Código</th>
+          <th class="text-left px-5 py-4 text-[rgba(250,247,242,.7)] font-medium" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Nome</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         {% for fab in fabricantes %}
-        <tr>
-            <td>{{ fab.codigo }}</td>
-            <td>{{ fab.nome }}</td>
+        <tr style="border-bottom:1px solid #F2EDE4;transition:background .15s">
+          <td class="px-5 py-4 text-[#9E9087] font-mono" style="font-size:.83rem">{{ fab.codigo }}</td>
+          <td class="px-5 py-4">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg flex items-center justify-center font-semibold flex-shrink-0 text-[#8B6555]" style="background:linear-gradient(135deg,#F2EDE4,#E0D5C8);font-size:.7rem">
+                {{ fab.nome|slice:":2"|upper }}
+              </div>
+              <span class="font-medium text-[#2C1A0E]" style="font-size:.9rem">{{ fab.nome }}</span>
+            </div>
+          </td>
         </tr>
         {% empty %}
-        <tr><td colspan="2">Nenhum fabricante cadastrado.</td></tr>
+        <tr>
+          <td colspan="2" class="px-5 py-14 text-center text-[#9E9087] italic" style="font-size:.88rem">
+            Nenhum fabricante cadastrado.
+            <a href="{% url 'cadastro_fabricante' %}" class="block mt-2 text-[#C4724A] no-underline" style="font-size:.82rem;font-style:normal">Cadastrar primeiro fabricante →</a>
+          </td>
+        </tr>
         {% endfor %}
-    </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 {% endblock %}

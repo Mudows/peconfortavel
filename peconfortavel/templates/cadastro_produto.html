@@ -1,47 +1,114 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Cadastro de Produto</h2>
-<form method="post" enctype="multipart/form-data" id="idFrmProduto" name="frmProduto">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="idTxtCodigo" class="form-label">Código</label>
-        <input type="number" class="form-control" id="idTxtCodigo" name="codigo" value="{{ form.codigo.value|default:'' }}" required>
+
+<div class="mb-8 pb-6 border-b border-[#E0D5C8]">
+  <p class="text-[.72rem] uppercase tracking-[.14em] text-[#C4724A] font-medium mb-1">Módulo de gestão</p>
+  <h2 class="font-light text-[#2C1A0E] leading-tight" style="font-family:'Cormorant Garamond',serif;font-size:2.5rem">Cadastro de Produto</h2>
+  <p class="text-[#9E9087] text-sm mt-1">Adicione um novo produto ao catálogo da loja.</p>
+</div>
+
+<form method="post" enctype="multipart/form-data" id="idFrmProduto" name="frmProduto" class="bg-white rounded-2xl border border-[#E0D5C8] p-8 md:p-10" style="box-shadow:0 1px 3px rgba(44,26,14,.08)">
+  {% csrf_token %}
+
+  <!-- Identificação -->
+  <p class="text-[.7rem] uppercase tracking-[.12em] text-[#9E9087] font-medium mb-5 flex items-center gap-2">Identificação <span class="flex-1 h-px bg-[#E0D5C8]"></span></p>
+  <div class="grid md:grid-cols-2 gap-x-6 gap-y-5 mb-8">
+
+    <div>
+      <label class="pc-label" for="idTxtCodigo">Código <span class="text-[#C4724A]">*</span></label>
+      <input type="number" class="pc-input" id="idTxtCodigo" name="codigo"
+             value="{{ form.codigo.value|default:'' }}" required placeholder="Ex: 1001" min="1">
     </div>
-    <div class="mb-3">
-        <label for="idTxtNome" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="idTxtNome" name="nome" value="{{ form.nome.value|default:'' }}" maxlength="70" required>
+
+    <div>
+      <label class="pc-label" for="idTxtNome">Nome <span class="text-[#C4724A]">*</span></label>
+      <input type="text" class="pc-input" id="idTxtNome" name="nome"
+             value="{{ form.nome.value|default:'' }}" maxlength="70" required placeholder="Nome do calçado">
     </div>
-    <div class="mb-3">
-        <label for="idNumPrecoCompra" class="form-label">Preço de compra</label>
-        <input type="number" step="0.01" class="form-control" id="idNumPrecoCompra" name="preco_compra" value="{{ form.preco_compra.value|default:'' }}" required>
+  </div>
+
+  <!-- Preços -->
+  <p class="text-[.7rem] uppercase tracking-[.12em] text-[#9E9087] font-medium mb-5 flex items-center gap-2">Precificação <span class="flex-1 h-px bg-[#E0D5C8]"></span></p>
+  <div class="grid md:grid-cols-2 gap-x-6 gap-y-5 mb-8">
+
+    <div>
+      <label class="pc-label" for="idNumPrecoCompra">Preço de compra <span class="text-[#C4724A]">*</span></label>
+      <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9E9087] text-sm pointer-events-none">R$</span>
+        <input type="number" step="0.01" class="pc-input" id="idNumPrecoCompra" name="preco_compra"
+               value="{{ form.preco_compra.value|default:'' }}" required placeholder="0,00" min="0" style="padding-left:2.5rem">
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="idNumPrecoVenda" class="form-label">Preço de venda</label>
-        <input type="number" step="0.01" class="form-control" id="idNumPrecoVenda" name="preco_venda" value="{{ form.preco_venda.value|default:'' }}" required>
+
+    <div>
+      <label class="pc-label" for="idNumPrecoVenda">Preço de venda <span class="text-[#C4724A]">*</span></label>
+      <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9E9087] text-sm pointer-events-none">R$</span>
+        <input type="number" step="0.01" class="pc-input" id="idNumPrecoVenda" name="preco_venda"
+               value="{{ form.preco_venda.value|default:'' }}" required placeholder="0,00" min="0" style="padding-left:2.5rem">
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="idSelCor" class="form-label">Cor</label>
-        <select class="form-select" id="idSelCor" name="cor" required>
-            <option value="">Selecione</option>
-            {% for value, label in form.cor.field.choices %}
-                <option value="{{ value }}" {% if form.cor.value == value %}selected{% endif %}>{{ label }}</option>
-            {% endfor %}
-        </select>
+  </div>
+
+  <!-- Características -->
+  <p class="text-[.7rem] uppercase tracking-[.12em] text-[#9E9087] font-medium mb-5 flex items-center gap-2">Características <span class="flex-1 h-px bg-[#E0D5C8]"></span></p>
+  <div class="grid md:grid-cols-2 gap-x-6 gap-y-5 mb-8">
+
+    <div>
+      <label class="pc-label" for="idSelCor">Cor <span class="text-[#C4724A]">*</span></label>
+      <select class="pc-select" id="idSelCor" name="cor" required>
+        <option value="">Selecione a cor</option>
+        {% for value, label in form.cor.field.choices %}
+          <option value="{{ value }}" {% if form.cor.value == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
     </div>
-    <div class="mb-3">
-        <label for="idSelFabricante" class="form-label">Fabricante</label>
-        <select class="form-select" id="idSelFabricante" name="fabricante" required>
-            <option value="">Selecione</option>
-            {% for fab in form.fabricante.field.queryset %}
-                <option value="{{ fab.pk }}" {% if form.fabricante.value == fab.pk %}selected{% endif %}>{{ fab.nome }}</option>
-            {% endfor %}
-        </select>
+
+    <div>
+      <label class="pc-label" for="idSelFabricante">Fabricante <span class="text-[#C4724A]">*</span></label>
+      <select class="pc-select" id="idSelFabricante" name="fabricante" required>
+        <option value="">Selecione o fabricante</option>
+        {% for fab in form.fabricante.field.queryset %}
+          <option value="{{ fab.pk }}" {% if form.fabricante.value == fab.pk %}selected{% endif %}>{{ fab.nome }}</option>
+        {% endfor %}
+      </select>
     </div>
-    <div class="mb-3">
-        <label for="idFileImagem" class="form-label">Imagem</label>
-        <input type="file" class="form-control" id="idFileImagem" name="imagem" accept="image/*">
-    </div>
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
-    <button type="reset" class="btn btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
+  </div>
+
+  <!-- Imagem -->
+  <p class="text-[.7rem] uppercase tracking-[.12em] text-[#9E9087] font-medium mb-5 flex items-center gap-2">Imagem <span class="flex-1 h-px bg-[#E0D5C8]"></span></p>
+  <div class="mb-8">
+    <label for="idFileImagem" class="block cursor-pointer">
+      <div class="pc-file-zone" id="dropZone">
+        <svg class="w-9 h-9 mx-auto mb-2 text-[#C4724A] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+        <p class="text-sm text-[#9E9087]"><strong class="text-[#C4724A]">Clique para selecionar</strong> ou arraste aqui</p>
+        <p class="text-xs text-[#9E9087] mt-1" id="fileNameLabel">PNG, JPG, WEBP aceitos</p>
+      </div>
+    </label>
+    <input type="file" class="hidden" id="idFileImagem" name="imagem" accept="image/*">
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex gap-3 pt-6 border-t border-[#E0D5C8]">
+    <button type="submit" class="pc-btn-primary">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      Cadastrar
+    </button>
+    <button type="reset" class="pc-btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
+  </div>
+
 </form>
+
+<script>
+  document.getElementById('idFileImagem')?.addEventListener('change', function() {
+    const label = document.getElementById('fileNameLabel');
+    const zone  = document.getElementById('dropZone');
+    if (this.files.length > 0) {
+      label.textContent = '✓ ' + this.files[0].name;
+      label.style.color = '#27AE60';
+      zone.style.borderColor = '#27AE60';
+      zone.style.borderStyle = 'solid';
+    }
+  });
+</script>
 {% endblock %}

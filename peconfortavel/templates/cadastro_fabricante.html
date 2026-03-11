@@ -1,17 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Cadastro de Fabricante</h2>
-<form method="post" id="idFrmFabricante" name="frmFabricante">
+
+<div class="mb-8 pb-6 border-b border-[#E0D5C8]">
+  <p class="text-[.72rem] uppercase tracking-[.14em] text-[#C4724A] font-medium mb-1">Módulo de gestão</p>
+  <h2 class="font-light text-[#2C1A0E] leading-tight" style="font-family:'Cormorant Garamond',serif;font-size:2.5rem">Cadastro de Fabricante</h2>
+  <p class="text-[#9E9087] text-sm mt-1">Registre um novo fabricante parceiro da rede.</p>
+</div>
+
+<div class="max-w-lg">
+  <form method="post" id="idFrmFabricante" name="frmFabricante" class="bg-white rounded-2xl border border-[#E0D5C8] p-8" style="box-shadow:0 1px 3px rgba(44,26,14,.08)">
     {% csrf_token %}
-    <div class="mb-3">
-        <label for="idTxtCodigo" class="form-label">Código</label>
-        <input type="number" class="form-control" id="idTxtCodigo" name="codigo" value="{{ form.codigo.value|default:'' }}" required>
+
+    <div class="mb-5">
+      <label class="pc-label" for="idTxtCodigo">Código <span class="text-[#C4724A]">*</span></label>
+      <input type="number" class="pc-input" id="idTxtCodigo" name="codigo"
+             value="{{ form.codigo.value|default:'' }}" required placeholder="Número identificador" min="1">
     </div>
-    <div class="mb-3">
-        <label for="idTxtNome" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="idTxtNome" name="nome" value="{{ form.nome.value|default:'' }}" maxlength="70" required>
+
+    <div class="mb-8">
+      <label class="pc-label" for="idTxtNome">Nome <span class="text-[#C4724A]">*</span></label>
+      <input type="text" class="pc-input" id="idTxtNome" name="nome"
+             value="{{ form.nome.value|default:'' }}" maxlength="70" required placeholder="Nome do fabricante">
+      <p class="pc-hint">Máximo de 70 caracteres.</p>
     </div>
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
-    <button type="reset" class="btn btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
-</form>
+
+    <div class="flex gap-3 pt-6 border-t border-[#E0D5C8]">
+      <button type="submit" class="pc-btn-primary">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        Cadastrar
+      </button>
+      <button type="reset" class="pc-btn-secondary" id="idBtnLimpar" name="btnLimpar">Limpar</button>
+    </div>
+
+  </form>
+</div>
+
 {% endblock %}
